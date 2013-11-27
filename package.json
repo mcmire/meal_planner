@@ -1,0 +1,23 @@
+{
+  "name": "meal_planner",
+  "version": "0.0.1",
+  "description": "Plan your meals",
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/mcmire/meal_planner"
+  },
+  "author": "Elliot Winkler <elliot.winkler@gmail.com>",
+  "private": true,
+  "scripts": {
+    "start": "coffee app/server.coffee"
+  },
+  "dependencies": {
+    "express": "3.4.4",
+    "jade": "*",
+    "stylus": "*",
+    "coffee-script": "*"
+  },
+  "devDependencies": {
+    "node-supervisor": "*"
+  }
+}
