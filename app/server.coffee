@@ -7,7 +7,9 @@ app = express()
 app.set('view engine', 'jade')
 app.set('views', config.templatesDir)
 app.locals(config: config)
-app.use(express.logger(format: 'at=:date method=:method url=:url'))
+express.logger.token 'time', (req, res) ->
+  (new Date()).toISOString()
+app.use(express.logger(format: 'at=:time method=:method url=:url status=:status'))
 
 # OTHER STUFF
 #app.use(express.favicon())
@@ -15,10 +17,11 @@ app.use(express.logger(format: 'at=:date method=:method url=:url'))
 #app.use(express.urlencoded())
 #app.use(express.methodOverride())
 
+require('./mincer')(app)
+
 require('./routes')(app)
 
-app.use(require('stylus').middleware(config.publicDir))
-app.use(express.static(config.staticDir))
+app.use(express.static(config.staticPath))
 
 if app.get('env') is 'development'
   app.use(express.errorHandler())
