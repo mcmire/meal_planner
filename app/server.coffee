@@ -2,14 +2,17 @@
 
 config = require('./config')
 express = require('express')
+logger = require('./logger')
+mincer = require('./mincer')
+routes = require('./routes')
+# Simply requiring this will set it up
+mongoose = require('./mongoose')
 
 app = express()
 app.set('view engine', 'jade')
-app.set('views', config.templatesDir)
-app.locals(config: config)
-express.logger.token 'time', (req, res) ->
-  (new Date()).toISOString()
-app.use(express.logger(format: 'at=:time method=:method url=:url status=:status'))
+app.set('views', config.app.templatesDir)
+app.locals(config: config.app)
+logger(app)
 
 # OTHER STUFF
 #app.use(express.favicon())
@@ -17,18 +20,16 @@ app.use(express.logger(format: 'at=:time method=:method url=:url status=:status'
 #app.use(express.urlencoded())
 #app.use(express.methodOverride())
 
-require('./mincer')(app)
-
-require('./routes')(app)
-
-app.use(express.static(config.staticPath))
+mincer(app)
+routes(app)
+app.use(express.static(config.app.staticPath))
 
 if app.get('env') is 'development'
   app.use(express.errorHandler())
 
-app.listen config.port, config.host, (error) ->
+app.listen config.app.port, config.app.host, (error) ->
   if error
     console.error("!! Express failed to start: #{error}")
     process.exit(1)
   else
-    console.log("== Express is listening on #{config.host} port #{config.port}")
+    console.log("== Express is listening on #{config.app.host} port #{config.app.port}")
