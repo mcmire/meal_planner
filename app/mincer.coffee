@@ -1,14 +1,22 @@
 mincer = require('mincer')
 config = require('./config')
-bower = require('./bower')
-
-env = new mincer.Environment
-
-env.appendPath('app/assets/javascripts')
-env.appendPath('app/assets/stylesheets')
-bower(env)
-
-mincer.logger.use(console)
+fs = require('fs')
+path = require('path')
 
 module.exports = (app) ->
-  app.use(config.assetsPath, mincer.createServer(env))
+  mincer.logger.use(console)
+
+  paths = ['app/assets/javascripts', 'app/assets/stylesheets']
+  entries = fs.readdirSync path.join(config.rootDir, 'bower_components')
+  entries.forEach (entry) ->
+    subdir = path.join('bower_components', entry)
+    paths.push(subdir)
+    # bootstrap
+    paths.push(path.join(subdir, 'js'))
+    paths.push(path.join(subdir, 'stylus'))
+    paths.push(path.join(subdir, 'fonts'))
+
+  app.use require('connect-assets')(
+    paths: paths
+    servePath: config.app.assetsPath
+  )

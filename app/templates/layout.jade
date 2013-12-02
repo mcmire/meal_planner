@@ -3,7 +3,7 @@ html
   head
     title Meal Planner
     block head
-    link(rel="stylesheet" href="/assets/application.css")
+    != css('application.css')
   body
     block body
-    script(src="/assets/application.js")
+    != js('application.js')
