@@ -21,8 +21,8 @@ logger(app)
 #app.use(express.methodOverride())
 
 mincer(app)
-routes(app)
 app.use(express.static(config.app.staticPath))
+routes(app)
 
 if app.get('env') is 'development'
   app.use(express.errorHandler())

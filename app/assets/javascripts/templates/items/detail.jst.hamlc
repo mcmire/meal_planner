@@ -1,0 +1,10 @@
+%table
+  %tr
+    %th Carbs
+    %td= @item.get('carbs_amount')
+  %tr
+    %th Fat
+    %td= @item.get('fat_amount')
+  %tr
+    %th Protein
+    %td= @item.get('protein_amount')

@@ -1,10 +1,5 @@
 extends layout
 
 block body
-  .sidebar
-    ul.items
-      - each item in items
-        li
-          a(href="#" data-id="#{item.id}")= item.name
-
-  .content
+  .js-sidebar
+  .js-content
