@@ -22,3 +22,4 @@ define 'views/items/list_view',
         $link = $(event.target)
         itemId = $link.parent().data('id')
         require('router').navigate "items/#{itemId}", trigger: true
+        return false
