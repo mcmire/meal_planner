@@ -11,22 +11,28 @@ module.exports = (grunt) ->
 
     items = [
       {
-        name: 'Whole Foods Granola (12oz)'
+        name: 'Whole Foods Granola'
+        calories_amount: 1000
         carbs_amount: 100
         fat_amount: 20
         protein_amount: 15
+        serving_size: [10, 'g']
       },
       {
         name: 'Chiquita Banana'
+        calories_amount: 500
         carbs_amount: 200
         fat_amount: 35
         protein_amount: 25
+        serving_size: [4, 'tbsp']
       },
       {
         name: 'General Mills Cheerios'
+        calories_amount: 800
         carbs_amount: 500
         fat_amount: 35
         protein_amount: 50
+        serving_size: [50, 'g']
       }
     ]
 

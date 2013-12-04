@@ -1,10 +1,16 @@
-%table
+%table.item
+  %tr
+    %th Calories
+    %td= @item.get('calories_amount')
   %tr
     %th Carbs
-    %td= @item.get('carbs_amount')
+    %td= @item.get('carbs_amount') + 'g'
   %tr
     %th Fat
-    %td= @item.get('fat_amount')
+    %td= @item.get('fat_amount') + 'g'
   %tr
     %th Protein
-    %td= @item.get('protein_amount')
+    %td= @item.get('protein_amount') + 'g'
+  %tr
+    %th Serving size
+    %td= @item.get('serving_size').join('')
