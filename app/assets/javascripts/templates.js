@@ -1,0 +1,1 @@
+//= require templates/items/detail

@@ -1,13 +1,12 @@
-define 'router', ['index'], (app) ->
-  Router = Backbone.Router.extend
-    routes:
-      '': 'index',
-      'items/:id': 'itemDetail'
+Router = Backbone.Router.extend
+  routes:
+    '': 'index',
+    'items/:id': 'itemDetail'
 
-    index: ->
-      app.load()
+  index: ->
+    MealPlanner.controller.loadIndex()
 
-    itemDetail: (id) ->
-      app.showItemDetail(id)
+  itemDetail: (id) ->
+    MealPlanner.controller.showItemDetail(id)
 
-  new Router
+MealPlanner.router = new Router

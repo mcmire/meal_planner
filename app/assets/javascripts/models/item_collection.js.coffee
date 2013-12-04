@@ -1,11 +1,10 @@
-define 'models/item_collection', ['models/item'], (Item) ->
-  Backbone.Collection.extend
-    model: Item,
-    url: '/items.json'
-    idAttribute: '_id'
+MealPlanner.ItemCollection = Backbone.Collection.extend
+  model: MealPlanner.Item,
+  url: '/items.json'
+  idAttribute: '_id'
 
-    parse: (data) ->
-      if data.items?
-        data.items
-      else
-        data
+  parse: (data) ->
+    if data.items?
+      data.items
+    else
+      data

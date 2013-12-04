@@ -1,25 +1,21 @@
-define 'views/items/list_view',
-  ['views/items/list_item_view'],
-  (ListItemView) ->
+MealPlanner.Items.ListView = Backbone.View.extend
+  tag: 'ul'
+  className: 'items'
+  events:
+    "click .item a": 'showItemDetail'
 
-    Backbone.View.extend
-      tag: 'ul'
-      className: 'items'
-      events:
-        "click .item a": 'showItemDetail'
+  initialize: ->
+    @subviews = @collection.map (model) ->
+      new MealPlanner.Items.ListItemView(model: model)
 
-      initialize: ->
-        @subviews = @collection.map (model) ->
-          new ListItemView(model: model)
+  render: ->
+    @$el.empty()
+    for subview in @subviews
+      subview.render()
+      @$el.append(subview.$el)
 
-      render: ->
-        @$el.empty()
-        for subview in @subviews
-          subview.render()
-          @$el.append(subview.$el)
-
-      showItemDetail: (event) ->
-        $link = $(event.target)
-        itemId = $link.parent().data('id')
-        require('router').navigate "items/#{itemId}", trigger: true
-        return false
+  showItemDetail: (event) ->
+    $link = $(event.target)
+    itemId = $link.parent().data('id')
+    MealPlanner.router.navigate "items/#{itemId}", trigger: true
+    return false

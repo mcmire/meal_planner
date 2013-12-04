@@ -1,0 +1,2 @@
+window.MealPlanner = {}
+MealPlanner.Items = {}
