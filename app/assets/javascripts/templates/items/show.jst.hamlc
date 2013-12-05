@@ -14,3 +14,6 @@
   %tr
     %th Serving size
     %td= @item.get('serving_size').join('')
+
+%p
+  %button.js-switch-to-edit.btn Edit

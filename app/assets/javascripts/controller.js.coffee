@@ -6,15 +6,15 @@ class Controller
   loadIndex: ->
     itemCollection = new MealPlanner.ItemCollection
     itemCollection.fetch().then =>
-      listView = new MealPlanner.Items.ListView(collection: itemCollection)
-      listView.render()
-      @$sidebar.append(listView.$el)
+      view = new MealPlanner.Items.ListView(collection: itemCollection)
+      view.render()
+      @$sidebar.html(view.$el)
 
   showItemDetail: (id) ->
     item = new MealPlanner.Item(_id: id)
     item.fetch().then =>
-      detailView = new MealPlanner.Items.DetailView(model: item)
-      detailView.render()
-      @$content.html(detailView.$el)
+      view = new MealPlanner.Items.ShowOrEditView(model: item)
+      view.render()
+      @$content.html(view.$el)
 
 MealPlanner.controller = new Controller

@@ -1,1 +1,1 @@
-//= require templates/items/detail
+//= require templates/items/show
