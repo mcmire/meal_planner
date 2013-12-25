@@ -1,2 +1,1 @@
 window.MealPlanner = {}
-MealPlanner.Items = {}

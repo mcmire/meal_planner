@@ -1,5 +1,5 @@
-config = require('./config')
-mongoose = require('mongoose')
+var config = require('./config')
+var mongoose = require('mongoose')
 
 mongoose.connect(config.mongoose.connectionString)
 

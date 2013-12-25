@@ -1,16 +1,20 @@
 {
   "name": "meal_planner",
   "version": "0.0.1",
-  "main": "app/server.coffee",
+  "main": "app.js",
   "dependencies": {
     "async": "0.2.9",
+    "burokrat": "0.0.4",
     "coffee-script": "1.6.3",
     "connect-assets": "3.0.0-alpha1",
     "express": "3.4.4",
     "haml-coffee": "1.13.5",
+    "html-escape": "1.0.1",
     "jade": "0.35.0",
     "lodash": "2.4.0",
     "mongoose": "3.8.1",
+    "optimist": "0.6.0",
+    "string": "1.7.0",
     "stylus": "0.40.3"
   },
   "devDependencies": {
@@ -26,6 +30,6 @@
   },
   "author": "Elliot Winkler <elliot.winkler@gmail.com>",
   "scripts": {
-    "start": "coffee app/server.coffee"
+    "start": "node app.js"
   }
 }
