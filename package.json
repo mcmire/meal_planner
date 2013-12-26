@@ -4,6 +4,7 @@
   "main": "app.js",
   "dependencies": {
     "async": "0.2.9",
+    "bookshelf": "0.6.2",
     "burokrat": "0.0.4",
     "coffee-script": "1.6.3",
     "connect-assets": "3.0.0-alpha1",
@@ -11,9 +12,11 @@
     "haml-coffee": "1.13.5",
     "html-escape": "1.0.1",
     "jade": "0.35.0",
+    "knex": "0.5.2",
     "lodash": "2.4.0",
-    "mongoose": "3.8.1",
+    "mincer": "~> 0.5.12",
     "optimist": "0.6.0",
+    "pg": "*",
     "string": "1.7.0",
     "stylus": "0.40.3"
   },

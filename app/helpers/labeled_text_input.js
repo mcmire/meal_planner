@@ -5,11 +5,6 @@ var string = require('string')
 function LabeledTextInput(formBuilder, attrName, options) {
   var _this = this
 
-  //console.log({
-  //  attrName: attrName,
-  //  options: options
-  //})
-
   var buildTagAttribute = function (key, value, escape) {
     options = options || {}
     if (escape) {
@@ -20,7 +15,7 @@ function LabeledTextInput(formBuilder, attrName, options) {
 
   var cleanAttributes = function (attributes) {
     return _.omit(attributes, function (value) {
-      return value !== null && value !== undefined
+      return value === null || value === undefined
     })
   }
 
@@ -72,27 +67,26 @@ function LabeledTextInput(formBuilder, attrName, options) {
 
     return (
       buildStartTag(name, attributes, options.escape) +
-      buildContentAndEndTag(name, options.content)
+      buildContentAndEndTag(name, content)
     )
   }
 
   var fieldName = function () {
     return (
-      string(_this.model.constructor.name).humanize().s +
+      string(_this.model.constructor.modelName.toLowerCase()).underscore().s +
       '[' + _this.attrName + ']'
     )
   }
 
   var fieldValue = function () {
-    return _this.model[_this.attrName]
+    return _this.model.get(_this.attrName)
   }
 
   var labelTag = function () {
     var name = fieldName()
-    console.log({name: name})
     var content =
       _this.options.label ||
-      string(name).humanize().s
+      string(_this.attrName).humanize().s
 
     return buildContentTag('label', {
       attributes: { 'for': name },
@@ -105,22 +99,30 @@ function LabeledTextInput(formBuilder, attrName, options) {
       attributes: {
         type: 'text',
         name: fieldName(),
-        value: fieldValue()
+        value: fieldValue(),
+        'class': 'form-control'
       }
     })
   }
 
-  var withAddon = function (content) {
-    var addon = buildContentTag('span', {
-      attributes: { 'class': 'input-group-addon' },
-      content: _this.options.addon
-    })
-
+  var inputGroup = function (content) {
     return buildContentTag('div', {
       attributes: { 'class': 'input-group' },
-      content: function () {
-        return content + addon
-      }
+      content: content
+    })
+  }
+
+  var addon = function (content) {
+    return buildContentTag('span', {
+      attributes: { 'class': 'input-group-addon' },
+      content: content
+    })
+  }
+
+  var formGroup = function (content) {
+    return buildContentTag('div', {
+      attributes: { 'class': 'form-group' },
+      content: content
     })
   }
 
@@ -129,12 +131,13 @@ function LabeledTextInput(formBuilder, attrName, options) {
   this.options = options || {}
 
   this.toHTML = function () {
-    var labelAndInput = labelTag() + inputTag()
+    var content
     if (this.options.addon) {
-      return withAddon(labelAndInput)
-    } else { 
-      return labelAndInput
+      content = inputTag() + addon(this.options.addon)
+    } else {
+      content = inputTag()
     }
+    return formGroup(labelTag() + inputGroup(content))
   }
 }
 

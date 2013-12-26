@@ -4,7 +4,7 @@ var logger = require('./logger')
 var mincer = require('./mincer')
 var routes = require('./routes')
 // Simply requiring this will set it up
-var mongoose = require('./mongoose')
+require('./bookshelf')
 
 module.exports = function () {
   var app = express()
@@ -21,7 +21,7 @@ module.exports = function () {
   //app.use(express.methodOverride())
 
   mincer(app)
-  app.use(express.static(config.app.staticPath))
+  app.use(express['static'](config.app.staticPath))
   routes(app)
 
   if (app.get('env') === 'development') {

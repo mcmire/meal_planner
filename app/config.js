@@ -2,7 +2,7 @@ var path = require('path')
 var argv = require('optimist').argv
 var config = {}
 var app = {}
-var mongoose = {}
+var db = {}
 
 app.rootDir = path.resolve(__dirname, '..')
 app.appDir = path.join(app.rootDir, 'app')
@@ -13,11 +13,10 @@ app.assetsPath = '/assets'
 app.host = '127.0.0.1'
 app.port = (argv.port || argv.p || '3000')
 
-mongoose.host = (process.env['MONGODB_HOST'] || 'localhost')
-mongoose.databaseName = 'meal_planner'
-mongoose.connectionString = ("mongodb://" + mongoose.host + "/" + mongoose.databaseName)
+db.host = '127.0.0.1'
+db.databaseName = 'meal_planner'
 
 module.exports = {
   app: app,
-  mongoose: mongoose
+  db: db
 }

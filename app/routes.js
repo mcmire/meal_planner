@@ -8,7 +8,6 @@ module.exports = function (app) {
 
   app.get('/items/new', function (req, res) {
     item = new Item()
-    console.log({itemName: item.constructor.name})
     input = new FormInputBuilder(item)
     res.render('items/new', {
       input: input

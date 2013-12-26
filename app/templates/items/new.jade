@@ -3,75 +3,39 @@ extends ../layout
 block body
   h2 Add an Item
 
-  .form(role="form")
-    .form-group
-      != input.labeledText('name')
-    //
-      .form-group
-        != input.labeledText('serving_size', {addon: 'g'})
-      .form-group
-        != input.labeledText('calories', {addon: 'g'})
-      .form-group
-        != input.labeledText('calories_from_fat', {addon: 'g'})
-      .form-group
-        != input.labeledText('protein', {addon: 'g'})
-      .form-group
-        != input.labeledText('total_fat', {addon: 'g'})
-      .form-group
-        != input.labeledText('saturated_fat', {addon: 'g'})
-      .form-group
-        != input.labeledText('trans_fat', {addon: 'g'})
-      .form-group
-        != input.labeledText('polyunsaturated_fat', {addon: 'g'})
-      .form-group
-        != input.labeledText('monounsaturated_fat', {addon: 'g'})
-      .form-group
-        != input.labeledText('cholesterol', {addon: 'g'})
-      .form-group
-        != input.labeledText('total_carbohydrates', {addon: 'g'})
-      .form-group
-        != input.labeledText('fiber', {addon: 'g'})
-      .form-group
-        != input.labeledText('soluble_fiber', {addon: 'g'})
-      .form-group
-        != input.labeledText('sugars', {addon: 'g'})
-      .form-group
-        != input.labeledText('other_carbohydrates', {addon: 'g'})
-      .form-group
-        != input.labeledText('vitamin_a', {label: 'Vitamin A', addon: 'g'})
-      .form-group
-        != input.labeledText('thiamin', {label: 'Thiamin (Vitamin B1)', addon: 'g'})
-      .form-group
-        != input.labeledText('riboflavin', {label: 'Riboflavin (Vitamin B2)', addon: 'g'})
-      .form-group
-        != input.labeledText('niacin', {label: 'Niacin (Vitamin B3)', addon: 'g'})
-      .form-group
-        != input.labeledText('total_vitamin_b9', {label: 'Vitamin B9, total (Folate / folic acid)', addon: 'g'})
-      .form-group
-        != input.labeledText('vitamin_b6', {label: 'Vitamin B6', addon: 'g'})
-      .form-group
-        != input.labeledText('vitamin_b12', {label: 'Vitamin B12', addon: 'g'})
-      .form-group
-        != input.labeledText('vitamin_c', {label: 'Vitamin C', addon: 'g'})
-      .form-group
-        != input.labeledText('vitamin_d', {label: 'Vitamin D', addon: 'g'})
-      .form-group
-        != input.labeledText('vitamin_e', {label: 'Vitamin E', addon: 'g'})
-      .form-group
-        != input.labeledText('calcium', {addon: 'g'})
-      .form-group
-        != input.labeledText('copper', {addon: 'g'})
-      .form-group
-        != input.labeledText('iron', {addon: 'g'})
-      .form-group
-        != input.labeledText('magnesium', {addon: 'g'})
-      .form-group
-        != input.labeledText('manganese', {addon: 'g'})
-      .form-group
-        != input.labeledText('phosphorus', {addon: 'g'})
-      .form-group
-        != input.labeledText('potassium', {addon: 'g'})
-      .form-group
-        != input.labeledText('sodium', {addon: 'g'})
-      .form-group
-        != input.labeledText('zinc', {addon: 'g'})
+  form(role="form")
+    != input.labeledText('name')
+    != input.labeledText('serving_size', {addon: 'g'})
+    != input.labeledText('calories', {addon: 'g'})
+    != input.labeledText('calories_from_fat', {addon: 'g'})
+    != input.labeledText('protein', {addon: 'g'})
+    != input.labeledText('total_fat', {addon: 'g'})
+    != input.labeledText('saturated_fat', {addon: 'g'})
+    != input.labeledText('trans_fat', {addon: 'g'})
+    != input.labeledText('polyunsaturated_fat', {addon: 'g'})
+    != input.labeledText('monounsaturated_fat', {addon: 'g'})
+    != input.labeledText('cholesterol', {addon: 'g'})
+    != input.labeledText('total_carbohydrates', {addon: 'g'})
+    != input.labeledText('fiber', {addon: 'g'})
+    != input.labeledText('soluble_fiber', {addon: 'g'})
+    != input.labeledText('sugars', {addon: 'g'})
+    != input.labeledText('other_carbohydrates', {addon: 'g'})
+    != input.labeledText('vitamin_a', {label: 'Vitamin A', addon: 'g'})
+    != input.labeledText('thiamin', {label: 'Thiamin (Vitamin B1)', addon: 'g'})
+    != input.labeledText('riboflavin', {label: 'Riboflavin (Vitamin B2)', addon: 'g'})
+    != input.labeledText('niacin', {label: 'Niacin (Vitamin B3)', addon: 'g'})
+    != input.labeledText('total_vitamin_b9', {label: 'Vitamin B9, total (Folate / folic acid)', addon: 'g'})
+    != input.labeledText('vitamin_b6', {label: 'Vitamin B6', addon: 'g'})
+    != input.labeledText('vitamin_b12', {label: 'Vitamin B12', addon: 'g'})
+    != input.labeledText('vitamin_c', {label: 'Vitamin C', addon: 'g'})
+    != input.labeledText('vitamin_d', {label: 'Vitamin D', addon: 'g'})
+    != input.labeledText('vitamin_e', {label: 'Vitamin E', addon: 'g'})
+    != input.labeledText('calcium', {addon: 'g'})
+    != input.labeledText('copper', {addon: 'g'})
+    != input.labeledText('iron', {addon: 'g'})
+    != input.labeledText('magnesium', {addon: 'g'})
+    != input.labeledText('manganese', {addon: 'g'})
+    != input.labeledText('phosphorus', {addon: 'g'})
+    != input.labeledText('potassium', {addon: 'g'})
+    != input.labeledText('sodium', {addon: 'g'})
+    != input.labeledText('zinc', {addon: 'g'})
