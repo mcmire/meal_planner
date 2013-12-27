@@ -2,7 +2,7 @@ var _ = require('lodash')
 var escapeHTML = require('html-escape')
 var string = require('string')
 
-function InputTagBuilder(formBuilder, attrName, options) {
+function InputTagBuilder(formBuilder, type, attrName, options) {
   var _this = this
 
   var buildTagAttribute = function (key, value, escape) {
@@ -97,7 +97,7 @@ function InputTagBuilder(formBuilder, attrName, options) {
   var inputTag = function () {
     return buildTag('input', {
       attributes: {
-        type: 'text',
+        type: type,
         name: fieldName(),
         value: fieldValue(),
         'class': 'form-control'
@@ -132,12 +132,18 @@ function InputTagBuilder(formBuilder, attrName, options) {
 
   this.toHTML = function () {
     var content
+
     if (this.options.addon) {
       content = inputGroup(inputTag() + addon(this.options.addon))
     } else {
       content = inputTag()
     }
-    return formGroup(labelTag() + content)
+
+    if (this.options.labeled) {
+      return formGroup(labelTag() + content)
+    } else {
+      return formGroup(content)
+    }
   }
 }
 
