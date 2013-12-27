@@ -2,7 +2,7 @@ var _ = require('lodash')
 var escapeHTML = require('html-escape')
 var string = require('string')
 
-function LabeledTextInput(formBuilder, attrName, options) {
+function InputTagBuilder(formBuilder, attrName, options) {
   var _this = this
 
   var buildTagAttribute = function (key, value, escape) {
@@ -141,4 +141,4 @@ function LabeledTextInput(formBuilder, attrName, options) {
   }
 }
 
-module.exports = LabeledTextInput
+module.exports = InputTagBuilder
