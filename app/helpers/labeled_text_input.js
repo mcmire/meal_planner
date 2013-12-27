@@ -10,7 +10,7 @@ function LabeledTextInput(formBuilder, attrName, options) {
     if (escape) {
       value = escapeHTML(value)
     }
-    return key + '=' + value
+    return key + '="' + value + '"'
   }
 
   var cleanAttributes = function (attributes) {
@@ -121,7 +121,7 @@ function LabeledTextInput(formBuilder, attrName, options) {
 
   var formGroup = function (content) {
     return buildContentTag('div', {
-      attributes: { 'class': 'form-group' },
+      attributes: { 'class': 'form-group input' },
       content: content
     })
   }
@@ -133,11 +133,11 @@ function LabeledTextInput(formBuilder, attrName, options) {
   this.toHTML = function () {
     var content
     if (this.options.addon) {
-      content = inputTag() + addon(this.options.addon)
+      content = inputGroup(inputTag() + addon(this.options.addon))
     } else {
       content = inputTag()
     }
-    return formGroup(labelTag() + inputGroup(content))
+    return formGroup(labelTag() + content)
   }
 }
 
