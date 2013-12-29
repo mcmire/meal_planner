@@ -3,15 +3,28 @@
 body
   margin: 30px
 
-.wrapper
-  display: flex
+.item-form
+  .inputs
+    -webkit-column-break-inside: avoid
+    //-webkit-column-count: 5
+    -webkit-column-width: 200px
+    //-webkit-column-fill: balance
+    -webkit-column-gap: 30px
+    -webkit-column-span: none
+    //width: 600px
+    border: 1px solid red
 
-.sidebar
-  width: 300px
+    .form-group
+      -webkit-column-break-inside: avoid
 
-.content
-  flex: 1 0 auto
+  .field-group
+    -webkit-column-break-inside: avoid
 
-  .item
-    th
-      width: 100px
+    .form-group:nth-of-type(n+2)
+      margin-left: 20px
+
+      label
+        font-size: 90%
+
+  input::-webkit-outer-spin-button, input::-webkit-inner-spin-button
+    display: none
