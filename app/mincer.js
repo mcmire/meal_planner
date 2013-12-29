@@ -1,14 +1,15 @@
-var mincer = require('mincer')
-var config = require('./config')
+var _ = require('lodash')
 var fs = require('fs')
+var Mincer = require('mincer')
 var path = require('path')
+var config = require('./config')
 
 module.exports = function (app) {
-  mincer.logger.use(console)
+  Mincer.logger.use(console)
 
   var paths = ['app/assets/javascripts', 'app/assets/stylesheets']
   entries = fs.readdirSync(path.join(config.app.rootDir, 'bower_components'))
-  entries.forEach(function (entry) {
+  _.each(entries, function (entry) {
     var subdir = path.join('bower_components', entry)
     paths.push(subdir)
     // bootstrap
@@ -17,12 +18,9 @@ module.exports = function (app) {
     paths.push(path.join(subdir, 'fonts'))
   })
 
-  console.log('Compiling assets...')
-  var connectAssets = require('connect-assets')({
-    paths: paths,
-    servePath: config.app.assetsPath
+  var env = new Mincer.Environment()
+  _.each(paths, function (path) {
+    env.appendPath(path)
   })
-  console.log('Done!')
-
-  app.use(connectAssets);
+  app.use('/assets', Mincer.createServer(env))
 }

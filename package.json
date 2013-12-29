@@ -7,7 +7,6 @@
     "bookshelf": "0.6.2",
     "burokrat": "0.0.4",
     "coffee-script": "1.6.3",
-    "connect-assets": "3.0.0-alpha1",
     "express": "3.4.4",
     "haml-coffee": "1.13.5",
     "html-escape": "1.0.1",
