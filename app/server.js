@@ -1,4 +1,4 @@
-var config = require('./config')
+var config = require('../config')
 var express = require('express')
 var logger = require('./logger')
 var mincer = require('./mincer')

@@ -1,5 +1,5 @@
 var Bookshelf = require('bookshelf')
-var config = require('./config').db
+var config = require('../config').db
 
 var bookshelf = Bookshelf.initialize({
   client: 'postgresql',

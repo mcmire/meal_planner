@@ -2,7 +2,7 @@ var _ = require('lodash')
 var fs = require('fs')
 var Mincer = require('mincer')
 var path = require('path')
-var config = require('./config')
+var config = require('../config')
 
 Mincer.logger.use(console)
 
