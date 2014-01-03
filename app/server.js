@@ -16,6 +16,8 @@ module.exports = function () {
 
   // middleware
   app.use(logger)
+  app.use(express.cookieParser('replace me with a random key'))
+  app.use(express.session({ cookie: { maxAge: 60000 }}))
   app.use('/assets', mincer)
   app.use(express['static'](config.app.staticPath))
 

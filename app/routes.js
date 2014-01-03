@@ -1,7 +1,10 @@
 var Item = require('./models/item')
+var notifications = require('./notifications')
 var FormInputBuilder = require('./helpers/form_input_builder')
 
 module.exports = function (app) {
+  app.all('*', notifications)
+
   app.get('/', function (req, res) {
     res.render('index')
   })

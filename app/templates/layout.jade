@@ -5,5 +5,9 @@ html
     block head
     link(rel="stylesheet" href="/assets/application.css")
   body
-    block body
+    .container
+      != notifications()
+
+      block body
+
     script(src="/assets/bundle.js")
