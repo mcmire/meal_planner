@@ -1,9 +1,11 @@
 var _ = require('lodash')
 var escapeHTML = require('html-escape')
-var string = require('string')
+var S = require('string')
 
-function InputTagBuilder(formBuilder, type, attrName, options) {
+function InputTagBuilder(formBuilder, type, attributeName, options) {
   var _this = this
+  var formGroupOptions
+  var errors
 
   var buildTagAttribute = function (key, value, escape) {
     options = options || {}
@@ -19,9 +21,25 @@ function InputTagBuilder(formBuilder, type, attrName, options) {
     })
   }
 
+  var convertCssClasses = function (attributes) {
+    attributes = _.clone(attributes)
+    var classes = [attributes['class'], attributes['classes']]
+    classes = _.flatten([classes]).join(" ").split(" ")
+    var cssClass = _.uniq(classes).join(" ").trim()
+
+    ;delete attributes['class']
+    ;delete attributes['classes']
+
+    if (cssClass) {
+      attributes['class'] = cssClass
+    }
+
+    return attributes
+  }
+
   var buildTagAttributes = function (attributes, escape) {
     options = options || {}
-    var cleanedAttributes = cleanAttributes(attributes)
+    var cleanedAttributes = cleanAttributes(convertCssClasses(attributes))
     return _.map(cleanedAttributes, function (value, key) {
       return buildTagAttribute(key, value, escape)
     }).join(" ")
@@ -72,21 +90,21 @@ function InputTagBuilder(formBuilder, type, attrName, options) {
   }
 
   var fieldName = function () {
-    return (
-      string(_this.model.constructor.modelName.toLowerCase()).underscore().s +
-      '[' + _this.attrName + ']'
-    )
+    var lowercasedModelName = _this.record.modelName.toLowerCase()
+    var underscoredModelName = S(lowercasedModelName).underscore().s
+
+    return underscoredModelName + '[' + _this.attributeName + ']'
   }
 
   var fieldValue = function () {
-    return _this.model.get(_this.attrName)
+    return _this.record.get(_this.attributeName)
   }
 
   var labelTag = function () {
     var name = fieldName()
     var content =
       _this.options.label ||
-      string(_this.attrName).humanize().s
+      S(_this.attributeName).humanize().s
 
     return buildContentTag('label', {
       attributes: { 'for': name },
@@ -94,56 +112,96 @@ function InputTagBuilder(formBuilder, type, attrName, options) {
     })
   }
 
+  var buildClasses = function (options, extraClasses) {
+    extraClasses = extraClasses || []
+    var classes = _.clone(extraClasses)
+    classes.push(options['class'])
+    classes = classes.concat(options['classes'])
+    if (_this.form.hasValidationOn('presence', _this.attributeName)) {
+      classes.push('required')
+    }
+    return classes
+  }
+
   var inputTag = function () {
+    var classes = buildClasses(_this.options, ['form-control'])
+    if (errors.length) {
+      classes.push('error')
+    }
+
     return buildTag('input', {
       attributes: {
         type: type,
         name: fieldName(),
         value: fieldValue(),
-        'class': 'form-control'
+        classes: classes,
+        tabindex: _this.options.tabindex
       }
     })
   }
 
   var inputGroup = function (content) {
+    var classes = buildClasses(inputGroupOptions, ['input-group'])
     return buildContentTag('div', {
-      attributes: { 'class': 'input-group' },
+      attributes: {
+        classes: classes
+      },
       content: content
     })
   }
 
   var addon = function (content) {
     return buildContentTag('span', {
-      attributes: { 'class': 'input-group-addon' },
+      attributes: { classes: ['input-group-addon'] },
       content: content
     })
   }
 
   var formGroup = function (content) {
+    var classes = buildClasses(formGroupOptions, ['form-group', 'input'])
     return buildContentTag('div', {
-      attributes: { 'class': 'form-group input' },
+      attributes: {
+        'classes': classes
+      },
       content: content
     })
   }
 
-  this.model = formBuilder.model
-  this.attrName = attrName
+  var errorMessages = function (errors) {
+    return buildContentTag('p', {
+      attributes: {
+        'classes': ['help-block', 'error']
+      },
+      content: errors.join('; ')
+    })
+  }
+
+  this.form = formBuilder.form
+  this.record = formBuilder.record
+  this.attributeName = attributeName
   this.options = options || {}
+  inputGroupOptions = options.inputGroup || {}
+  formGroupOptions = options.formGroup || {}
+  errors = this.form.errorsOn(this.attributeName)
 
   this.toHTML = function () {
-    var content
+    var parts = []
 
     if (this.options.addon) {
-      content = inputGroup(inputTag() + addon(this.options.addon))
+      parts.push(inputGroup(inputTag() + addon(this.options.addon)))
     } else {
-      content = inputTag()
+      parts.push(inputTag())
     }
 
     if (this.options.labeled) {
-      return formGroup(labelTag() + content)
-    } else {
-      return formGroup(content)
+      parts.unshift(labelTag())
     }
+
+    if (errors.length) {
+      parts.push(errorMessages(errors))
+    }
+
+    return formGroup(parts.join(""))
   }
 }
 
