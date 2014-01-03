@@ -2,7 +2,7 @@ var path = require('path')
 var argv = require('optimist').argv
 var config = {}
 var app = {}
-var db = {}
+var database = {}
 
 app.rootDir = path.resolve(__dirname, '..')
 app.appDir = path.join(app.rootDir, 'app')
@@ -13,10 +13,10 @@ app.assetsPath = '/assets'
 app.host = '127.0.0.1'
 app.port = (argv.port || argv.p || '3000')
 
-db.host = '127.0.0.1'
-db.databaseName = 'meal_planner'
+database.host = '127.0.0.1'
+database.name = 'meal_planner'
 
 module.exports = {
   app: app,
-  db: db
+  database: database
 }

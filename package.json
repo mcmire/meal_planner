@@ -8,6 +8,7 @@
     "burokrat": "0.0.4",
     "coffee-script": "1.6.3",
     "express": "3.4.4",
+    "fibers": "*",
     "haml-coffee": "1.13.5",
     "html-escape": "1.0.1",
     "jade": "0.35.0",

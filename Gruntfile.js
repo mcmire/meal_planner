@@ -1,7 +1,26 @@
+var childProcess = require('child_process')
+var config = require('./config')
 var Item = require('./app/models/item')
 var async = require('async')
 
 module.exports = function (grunt) {
+  grunt.registerTask('db:create', 'Create the database', function () {
+    var done = this.async()
+    var databaseName = config.database.name
+    childProcess.exec('createdb ' + databaseName, function (err, stdout, stderr) {
+      if (err) {
+        if (/already exists/.test(err.message)) {
+          console.log("Database " + databaseName + " already exists.")
+        } else {
+          throw err
+        }
+      } else {
+        console.log("Database " + databaseName + " created.")
+      }
+      done()
+    })
+  })
+
   grunt.registerTask('db:clear', 'Clear the database', function () {
     done = this.async()
     Item.remove(done)
