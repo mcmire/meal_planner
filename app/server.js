@@ -14,12 +14,6 @@ module.exports = function () {
   app.locals({config: config.app})
   logger(app)
 
-  // OTHER STUFF
-  //app.use(express.favicon())
-  //app.use(express.json())
-  //app.use(express.urlencoded())
-  //app.use(express.methodOverride())
-
   mincer(app)
   app.use(express['static'](config.app.staticPath))
   routes(app)
