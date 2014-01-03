@@ -9,19 +9,23 @@ require('./bookshelf')
 module.exports = function () {
   var app = express()
 
+  // configuration
   app.set('view engine', 'jade')
   app.set('views', config.app.templatesDir)
   app.locals({config: config.app})
-  app.use(logger)
 
+  // middleware
+  app.use(logger)
   app.use('/assets', mincer)
   app.use(express['static'](config.app.staticPath))
-  routes(app)
 
+  // routing
+  routes(app)
   if (app.get('env') === 'development') {
     app.use(express.errorHandler())
   }
 
+  // go go gadget
   app.listen(config.app.port, config.app.host, function (error) {
     if (error) {
       console.error("!! Express failed to start: " + error)
