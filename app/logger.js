@@ -1,9 +1,9 @@
 var express = require('express')
 
-express.logger.token('time', function (req, res) {
+express.logger.token('time', function () {
   return (new Date()).toISOString()
 })
 
-module.exports = function (app) {
-  app.use(express.logger({format: 'at=:time method=:method url=:url status=:status'}))
-}
+module.exports = express.logger({
+  format: 'at=:time method=:method url=:url status=:status'
+})

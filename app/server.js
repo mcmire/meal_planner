@@ -12,9 +12,9 @@ module.exports = function () {
   app.set('view engine', 'jade')
   app.set('views', config.app.templatesDir)
   app.locals({config: config.app})
-  logger(app)
+  app.use(logger)
 
-  mincer(app)
+  app.use('/assets', mincer)
   app.use(express['static'](config.app.staticPath))
   routes(app)
 
