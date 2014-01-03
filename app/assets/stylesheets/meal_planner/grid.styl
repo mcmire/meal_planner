@@ -1,0 +1,6 @@
+column-numbers = (1..$grid-columns)
+sizes = 'xs' 'sm' 'md' 'lg'
+for i in column-numbers
+  for size in sizes
+    .col-{size}-{i}
+      make-{size}-column i

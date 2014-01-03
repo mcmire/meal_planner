@@ -1,30 +1,29 @@
+$grid-columns = 30
+
 @import 'bootstrap'
+@import 'meal_planner/mixins'
+@import 'meal_planner/grid'
 
 body
   margin: 30px
 
 .item-form
-  .inputs
-    -webkit-column-break-inside: avoid
-    //-webkit-column-count: 5
-    -webkit-column-width: 200px
-    //-webkit-column-fill: balance
-    -webkit-column-gap: 30px
-    -webkit-column-span: none
-    //width: 600px
-    border: 1px solid red
-
-    .form-group
-      -webkit-column-break-inside: avoid
-
-  .field-group
-    -webkit-column-break-inside: avoid
-
-    .form-group:nth-of-type(n+2)
-      margin-left: 20px
-
-      label
-        font-size: 90%
+  .field-group *:nth-of-type(n+2) label
+    font-size: 90%
 
   input::-webkit-outer-spin-button, input::-webkit-inner-spin-button
     display: none
+
+  input.error
+    background-color: #fff0f0
+
+  p.error
+    color: red
+    font-style: italic
+
+  .buttons
+    text-align: center
+
+.form-group.required label:after
+  content: " *"
+  color: red
