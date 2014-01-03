@@ -24,6 +24,9 @@ module.exports = function () {
   if (app.get('env') === 'development') {
     app.use(express.errorHandler())
   }
+  app.use(function (req, res, next) {
+    res.render('not_found')
+  })
 
   // go go gadget
   app.listen(config.app.port, config.app.host, function (error) {
